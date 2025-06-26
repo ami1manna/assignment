@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import EmployeeCard from './components/EmployeeCard';
 import SearchBar from './components/SearchBar';
 import SectionTag from './components/SectionTag';
+import EmployeeDetails from './components/EmployeeDetails';
+import EditEmployeeForm from './components/EditEmployeeForm';
+import toast, { Toaster } from 'react-hot-toast';
+import { useEmployeeContext } from './context/EmployeeContext';
 
 const App = () => {
-  const [employees, setEmployees] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    employees,
+    setEmployees,
+    loading,
+    error,
+    deleteEmployee,
+    editEmployee,
+  } = useEmployeeContext();
+
   const [searchId, setSearchId] = useState('');
   const [filtered, setFiltered] = useState([]);
   const [searchError, setSearchError] = useState('');
@@ -17,26 +27,9 @@ const App = () => {
   const [editSalary, setEditSalary] = useState('');
   const [editAge, setEditAge] = useState('');
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const res = await fetch('https://dummy.restapiexample.com/api/v1/employees');
-        const data = await res.json();
-        if (data.status === 'success') {
-          setEmployees(data.data);
-          setFiltered(data.data);
-        } else {
-          setError('Failed to fetch employees.');
-        }
-      } catch (e) {
-        setError('Error fetching employees.');
-      }
-      setLoading(false);
-    };
-    fetchEmployees();
-  }, []);
+  React.useEffect(() => {
+    setFiltered(employees);
+  }, [employees]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -63,9 +56,8 @@ const App = () => {
   };
 
   const handleDelete = (id) => {
-    const newList = filtered.filter(emp => emp.id !== id);
-    setFiltered(newList);
-    setEmployees(employees.filter(emp => emp.id !== id));
+    deleteEmployee(id);
+    toast.success('Employee deleted!');
     if (selected && selected.id === id) setSelected(null);
     if (editEmp && editEmp.id === id) setEditEmp(null);
   };
@@ -80,8 +72,7 @@ const App = () => {
   const handleEditSave = (e) => {
     e.preventDefault();
     const updated = { ...editEmp, employee_name: editName, employee_salary: editSalary, employee_age: editAge };
-    setEmployees(employees.map(emp => emp.id === updated.id ? updated : emp));
-    setFiltered(filtered.map(emp => emp.id === updated.id ? updated : emp));
+    editEmployee(updated);
     setEditEmp(null);
   };
 
@@ -92,6 +83,7 @@ const App = () => {
 
   return (
     <div className="dashboard-container">
+      <Toaster position="top-right" />
       <header className="main-header">
         <h1>Employee Dashboard</h1>
         <p className="subtitle">Welcome! This dashboard lets you browse, search, and manage employees easily.</p>
@@ -123,28 +115,19 @@ const App = () => {
         </div>
       </SectionTag>
       {selected && !editEmp && (
-        <div className="details-panel">
-          <h2>Employee Details</h2>
-          <ul>
-            <li><b>ID:</b> {selected.id}</li>
-            <li><b>Name:</b> {selected.employee_name}</li>
-            <li><b>Salary:</b> ${selected.employee_salary}</li>
-            <li><b>Age:</b> {selected.employee_age}</li>
-            <li><b>Profile Image:</b> {selected.profile_image ? <img src={selected.profile_image} alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%' }} /> : 'N/A'}</li>
-          </ul>
-        </div>
+        <EmployeeDetails employee={selected} />
       )}
       {editEmp && (
-        <div className="details-panel">
-          <h2>Edit Employee (Mock)</h2>
-          <form onSubmit={handleEditSave} className="edit-form">
-            <label>Name: <input value={editName} onChange={e => setEditName(e.target.value)} /></label><br />
-            <label>Salary: <input value={editSalary} onChange={e => setEditSalary(e.target.value)} /></label><br />
-            <label>Age: <input value={editAge} onChange={e => setEditAge(e.target.value)} /></label><br />
-            <button type="submit">Save</button>
-            <button type="button" onClick={() => setEditEmp(null)} style={{ marginLeft: 8 }}>Cancel</button>
-          </form>
-        </div>
+        <EditEmployeeForm
+          name={editName}
+          salary={editSalary}
+          age={editAge}
+          onNameChange={setEditName}
+          onSalaryChange={setEditSalary}
+          onAgeChange={setEditAge}
+          onSave={handleEditSave}
+          onCancel={() => setEditEmp(null)}
+        />
       )}
     </div>
   );
