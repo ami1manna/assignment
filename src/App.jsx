@@ -1,47 +1,48 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import './App.css';
 
 const App = () => {
-    const [data , setData] = useState();
+  const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const fetchData = async () =>{
-   
-        try{
-
-            const res = await axios.get("https://jsonplaceholder.typicode.com/users");
-            setData(res.data);
-            // console.log(res);
+  useEffect(() => {
+    const fetchEmployees = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch('https://dummy.restapiexample.com/api/v1/employees');
+        const data = await res.json();
+        if (data.status === 'success') {
+          setEmployees(data.data);
+        } else {
+          setError('Failed to fetch employees.');
         }
-        catch(e){
-
-            console.log(e);
-        }   
-
-    }
-
-    useEffect(()=>{
-        console.log("usCallback");
-        fetchData();
-    },[]);
+      } catch (e) {
+        setError('Error fetching employees.');
+      }
+      setLoading(false);
+    };
+    fetchEmployees();
+  }, []);
 
   return (
- 
-    <div>
-        {/* <ul> */}
-      {
-        // console.log(data)
-
-        data.map((obj , index)=>{
-            return <div key={index}>
-                <h2>{obj.id}</h2>
-                <h4>{obj.name}</h4>
-                <h4>{obj.address.city}</h4>
-            </div>   
-        })
-      }
-        {/* </ul> */}
+    <div className="dashboard-container">
+      <h1>Employee Dashboard</h1>
+      <p>Browse all employees below. Each card shows basic info.</p>
+      {loading && <p>Loading employees...</p>}
+      {error && <p className="error">{error}</p>}
+      <div className="employee-list">
+        {employees.map(emp => (
+          <div className="employee-card" key={emp.id}>
+            <h2>{emp.employee_name}</h2>
+            <p><strong>Salary:</strong> ${emp.employee_salary}</p>
+            <p><strong>Age:</strong> {emp.employee_age}</p>
+          </div>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
