@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import EmployeeCard from './components/EmployeeCard';
-import SearchBar from './components/SearchBar';
+import EmployeeCard from './components/EmployeeCard/EmployeeCard';
+import SearchBar from './components/SearchBar/SearchBar';
+import EditEmployeeForm from './components/EditEmployeeForm/EditEmployeeForm';
+import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
 import toast, { Toaster } from 'react-hot-toast';
 import { useEmployeeContext } from './context/EmployeeContext';
 

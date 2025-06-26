@@ -1,5 +1,5 @@
 import React from 'react';
-import TopNav from './components/TopNav';
+import TopNav from './components/TopNav/TopNav';
 import { Outlet } from 'react-router-dom';
 
 const RootLayout = () => (

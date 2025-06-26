@@ -1,0 +1,47 @@
+.employeeCard {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 20px 28px;
+  min-width: 220px;
+  max-width: 260px;
+  transition: box-shadow 0.2s;
+  color: #222;
+}
+
+.employeeCard:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+.heading {
+  color: #1a237e;
+  margin-bottom: 8px;
+}
+
+.text {
+  color: #333;
+}
+
+.cardBtn {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 5px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.delete {
+  background: #b00020;
+}
+
+.cardBtn:hover {
+  background: #125ea2;
+}
+
+.delete:hover {
+  background: #d32f2f;
+} 
