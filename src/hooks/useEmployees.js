@@ -9,7 +9,8 @@ export default function useEmployees() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(import.meta.env.VITE_EMPLOYEE_API_URL);
+      console.log("fetching employees");
+      const res = await fetch(import.meta.env.VITE_EMPLOYEE_API_URL || 'https://dummy.restapiexample.com/api/v1/employees');
       const data = await res.json();
       if (data.status === 'success') {
         setEmployees(data.data);
@@ -34,6 +35,15 @@ export default function useEmployees() {
     setEmployees(prev => prev.map(emp => emp.id === updated.id ? updated : emp));
   };
 
+  const searchEmployees = (id) => {
+    if (!id.trim()) return { results: employees, error: '' };
+    const found = employees.filter(emp => String(emp.id) === id.trim());
+    if (found.length === 0) {
+      return { results: [], error: 'No employee found with that ID.' };
+    }
+    return { results: found, error: '' };
+  };
+
   return {
     employees,
     setEmployees, // for search filtering
@@ -42,5 +52,6 @@ export default function useEmployees() {
     fetchEmployees,
     deleteEmployee,
     editEmployee,
+    searchEmployees,
   };
 } 

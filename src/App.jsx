@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import EmployeeCard from './components/EmployeeCard';
 import SearchBar from './components/SearchBar';
@@ -11,11 +11,11 @@ import { useEmployeeContext } from './context/EmployeeContext';
 const App = () => {
   const {
     employees,
-    setEmployees,
     loading,
     error,
     deleteEmployee,
     editEmployee,
+    searchEmployees,
   } = useEmployeeContext();
 
   const [searchId, setSearchId] = useState('');
@@ -27,22 +27,21 @@ const App = () => {
   const [editSalary, setEditSalary] = useState('');
   const [editAge, setEditAge] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     setFiltered(employees);
   }, [employees]);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error, { id: 'fetch-error', duration: 4000 });
+    }
+  }, [error]);
+
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchError('');
-    if (!searchId.trim()) {
-      setFiltered(employees);
-      return;
-    }
-    const found = employees.filter(emp => String(emp.id) === searchId.trim());
-    if (found.length === 0) {
-      setSearchError('No employee found with that ID.');
-    }
-    setFiltered(found);
+    const { results, error } = searchEmployees(searchId);
+    setFiltered(results);
+    setSearchError(error);
     setSelected(null);
     setEditEmp(null);
   };

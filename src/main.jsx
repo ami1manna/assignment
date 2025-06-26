@@ -5,9 +5,9 @@ import App from './App.jsx'
 import { EmployeeProvider } from './context/EmployeeContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <EmployeeProvider>
       <App />
-    </EmployeeProvider>
-  </React.StrictMode>,
+    </EmployeeProvider>,
+  // {/* </React.StrictMode>, */}
 )
