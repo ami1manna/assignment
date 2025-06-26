@@ -70,10 +70,20 @@ h1 {
   min-width: 220px;
   max-width: 260px;
   transition: box-shadow 0.2s;
+  color: #222;
 }
 
 .employee-card:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+.employee-card h2 {
+  color: #1a237e;
+  margin-bottom: 8px;
+}
+
+.employee-card p, .employee-card strong {
+  color: #333;
 }
 
 .error {
@@ -151,4 +161,90 @@ h1 {
   color: #444;
   font-size: 0.98rem;
   margin: 6px 0 10px 0;
+}
+
+.details-panel {
+  max-width: 400px;
+  margin: 32px auto 0 auto;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 24px 28px;
+}
+
+.details-panel h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.details-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.details-panel li {
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.edit-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.edit-form input {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-form button {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 5px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.edit-form button[type="button"] {
+  background: #888;
+}
+
+.edit-form button:hover {
+  background: #125ea2;
+}
+
+.edit-form button[type="button"]:hover {
+  background: #555;
+}
+
+.card-btn {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 5px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.card-btn.delete {
+  background: #b00020;
+}
+
+.card-btn:hover {
+  background: #125ea2;
+}
+
+.card-btn.delete:hover {
+  background: #d32f2f;
 }
