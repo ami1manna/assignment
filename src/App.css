@@ -81,3 +81,74 @@ h1 {
   text-align: center;
   margin-top: 16px;
 }
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0 10px 0;
+}
+
+.search-bar input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-bar button[type="button"] {
+  background: #888;
+}
+
+.search-bar button:hover {
+  background: #125ea2;
+}
+
+.search-bar button[type="button"]:hover {
+  background: #555;
+}
+
+.main-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+.section-tag {
+  margin-bottom: 32px;
+}
+
+.tag {
+  display: inline-block;
+  background: #1976d2;
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+
+.instructions {
+  color: #444;
+  font-size: 0.98rem;
+  margin: 6px 0 10px 0;
+}
