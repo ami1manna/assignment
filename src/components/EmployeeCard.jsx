@@ -1,19 +1,22 @@
 import React from 'react';
 import '../App.css';
+import { Link } from 'react-router-dom';
 
-const EmployeeCard = ({ employee, onClick, onDelete, onEdit }) => {
+const EmployeeCard = ({ employee, onDelete }) => {
   return (
-    <div className="employee-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
-      <h2>{employee.employee_name}</h2>
-      <p><strong>Salary:</strong> ${employee.employee_salary}</p>
-      <p><strong>Age:</strong> {employee.employee_age}</p>
-      {(onDelete || onEdit) && (
+    <Link to={`/employee/${employee.id}`} style={{ textDecoration: 'none' }}>
+      <div className="employee-card" style={{ cursor: 'pointer' }}>
+        <h2>{employee.employee_name}</h2>
+        <p><strong>Salary:</strong> ${employee.employee_salary}</p>
+        <p><strong>Age:</strong> {employee.employee_age}</p>
         <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
-          {onEdit && <button type="button" className="card-btn" onClick={e => { e.stopPropagation(); onEdit(); }}>Edit</button>}
-          {onDelete && <button type="button" className="card-btn delete" onClick={e => { e.stopPropagation(); onDelete(); }}>Delete</button>}
+          <Link to={`/employee/${employee.id}/edit`} onClick={e => e.stopPropagation()}>
+            <button type="button" className="card-btn">Edit</button>
+          </Link>
+          <button type="button" className="card-btn delete" onClick={e => { e.preventDefault(); e.stopPropagation(); onDelete(); }}>Delete</button>
         </div>
-      )}
-    </div>
+      </div>
+    </Link>
   );
 };
 
