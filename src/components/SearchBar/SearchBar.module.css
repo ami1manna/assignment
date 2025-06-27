@@ -1,26 +1,42 @@
 .searchBar {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 20px 0 10px 0;
+  gap: 14px;
+  margin: 32px 0 18px 0;
+  background: #f7fafd;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.06);
+  padding: 18px 24px;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .searchInput {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
+  padding: 12px 18px;
+  border: 1.5px solid #e3e8f0;
+  border-radius: 7px;
+  font-size: 1.08rem;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  min-width: 180px;
+}
+
+.searchInput:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px #1976d233;
 }
 
 .searchButton {
-  padding: 8px 16px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   background: #1976d2;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.08rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(25, 118, 210, 0.04);
 }
 
 .resetButton {
@@ -28,9 +44,30 @@
 }
 
 .searchButton:hover {
-  background: #125ea2;
+  background: #1565c0;
 }
 
 .resetButton:hover {
   background: #555;
+}
+
+@media (max-width: 600px) {
+  .searchBar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 4vw;
+    border-radius: 8px;
+  }
+  .searchInput {
+    font-size: 0.98rem;
+    padding: 8px 10px;
+    min-width: 0;
+    width: 100%;
+  }
+  .searchButton {
+    font-size: 0.98rem;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 6px;
+  }
 } 

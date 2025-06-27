@@ -1,27 +1,50 @@
 .topnav {
   width: 100%;
-  height: 56px;
-  background: #1976d2;
+  height: 68px;
+  background: linear-gradient(90deg, #1976d2 60%, #1565c0 100%);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 32px;
+  padding: 0 56px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 24px rgba(25, 118, 210, 0.13);
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  backdrop-filter: blur(4px);
 }
 
 .navLogo {
-  font-size: 1.35rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 1.85rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  transition: color 0.18s;
+  cursor: pointer;
+}
+
+.navLogo:hover {
+  color: #e3e8f0;
 }
 
 .navLinks {
   display: flex;
-  gap: 18px;
+  gap: 28px;
   align-items: center;
+}
+
+@media (max-width: 600px) {
+  .topnav {
+    height: 54px;
+    padding: 0 10px;
+  }
+  .navLogo {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+  }
+  .navLinks {
+    gap: 10px;
+  }
 } 

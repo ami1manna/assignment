@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEmployeeContext } from '../context/EmployeeContext';
+import EditEmployeeForm from '../components/EditEmployeeForm/EditEmployeeForm';
 import '../App.css';
 
 const EditEmployeePage = () => {
@@ -12,6 +13,11 @@ const EditEmployeePage = () => {
   const [name, setName] = useState(employee ? employee.employee_name : '');
   const [salary, setSalary] = useState(employee ? employee.employee_salary : '');
   const [age, setAge] = useState(employee ? employee.employee_age : '');
+  const [nameError, setNameError] = useState('');
+  const [salaryError, setSalaryError] = useState('');
+  const [ageError, setAgeError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   if (!employee) return (
     <div className="details-panel">
@@ -20,24 +26,58 @@ const EditEmployeePage = () => {
     </div>
   );
 
-  const handleSave = (e) => {
+  const validate = () => {
+    let valid = true;
+    setNameError('');
+    setSalaryError('');
+    setAgeError('');
+    if (!name.trim()) {
+      setNameError('Name is required.');
+      valid = false;
+    }
+    if (!salary || isNaN(salary) || Number(salary) <= 0) {
+      setSalaryError('Salary must be a positive number.');
+      valid = false;
+    }
+    if (!age || isNaN(age) || Number(age) <= 0) {
+      setAgeError('Age must be a positive number.');
+      valid = false;
+    }
+    return valid;
+  };
+
+  const handleSave = async (e) => {
     e.preventDefault();
-    const updated = { ...employee, employee_name: name, employee_salary: salary, employee_age: age };
-    editEmployee(updated);
-    navigate('/');
+    if (!validate()) return;
+    setIsLoading(true);
+    setSuccess(false);
+    setTimeout(() => {
+      const updated = { ...employee, employee_name: name, employee_salary: salary, employee_age: age };
+      editEmployee(updated);
+      setIsLoading(false);
+      setSuccess(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 1200);
+    }, 900);
   };
 
   return (
-    <div className="details-panel">
-      <h2>Edit Employee</h2>
-      <form onSubmit={handleSave} className="edit-form">
-        <label>Name: <input value={name} onChange={e => setName(e.target.value)} /></label><br />
-        <label>Salary: <input value={salary} onChange={e => setSalary(e.target.value)} /></label><br />
-        <label>Age: <input value={age} onChange={e => setAge(e.target.value)} /></label><br />
-        <button type="submit">Save</button>
-        <button type="button" onClick={() => navigate('/')} style={{ marginLeft: 8 }}>Cancel</button>
-      </form>
-    </div>
+    <EditEmployeeForm
+      name={name}
+      salary={salary}
+      age={age}
+      onNameChange={setName}
+      onSalaryChange={setSalary}
+      onAgeChange={setAge}
+      onSave={handleSave}
+      onCancel={() => navigate('/')}
+      nameError={nameError}
+      salaryError={salaryError}
+      ageError={ageError}
+      isLoading={isLoading}
+      success={success}
+    />
   );
 };
 

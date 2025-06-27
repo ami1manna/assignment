@@ -31,6 +31,11 @@ export default function useEmployees() {
     setEmployees(prev => prev.filter(emp => emp.id !== id));
   };
 
+  // Bulk delete
+  const deleteEmployees = (ids) => {
+    setEmployees(prev => prev.filter(emp => !ids.includes(emp.id)));
+  };
+
   const editEmployee = (updated) => {
     setEmployees(prev => prev.map(emp => emp.id === updated.id ? updated : emp));
   };
@@ -51,6 +56,7 @@ export default function useEmployees() {
     error,
     fetchEmployees,
     deleteEmployee,
+    deleteEmployees, // bulk delete
     editEmployee,
     searchEmployees,
   };

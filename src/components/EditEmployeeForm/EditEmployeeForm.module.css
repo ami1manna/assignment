@@ -1,46 +1,98 @@
 .detailsPanel {
-  max-width: 400px;
-  margin: 32px auto 0 auto;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  padding: 24px 28px;
+  max-width: 440px;
+  margin: 56px auto 0 auto;
+  background: linear-gradient(135deg, #f4f6fb 0%, #fff 100%);
+  border: 1.5px solid #e3e8f0;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.13);
+  padding: 56px 44px 40px 44px;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+}
+
+.detailsPanel:hover {
+  box-shadow: 0 16px 48px rgba(25, 118, 210, 0.18);
+  border-color: #1976d2;
+  transform: translateY(-2px) scale(1.018);
 }
 
 .editFormLabel {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+  font-size: 1.08rem;
+  color: #1976d2;
+  font-weight: 600;
 }
 
 .editFormInput {
   margin-left: 8px;
-  padding: 4px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 16px;
+  border: 1.5px solid #e3e8f0;
+  border-radius: 7px;
+  font-size: 1.08rem;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  min-width: 180px;
+}
+
+.editFormInput:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px #1976d233;
 }
 
 .editFormButton {
-  padding: 6px 16px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   background: #1976d2;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.08rem;
+  font-weight: 600;
   cursor: pointer;
-  margin-top: 8px;
-  transition: background 0.2s;
+  margin-top: 12px;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(25, 118, 210, 0.04);
 }
 
 .cancelButton {
   background: #888;
-  margin-left: 8px;
+  margin-left: 12px;
 }
 
 .editFormButton:hover {
-  background: #125ea2;
+  background: #1565c0;
 }
 
 .cancelButton:hover {
   background: #555;
+}
+
+@media (max-width: 600px) {
+  .detailsPanel {
+    max-width: 98vw;
+    padding: 28px 6vw 14px 6vw;
+    border-radius: 12px;
+  }
+  .editFormLabel {
+    font-size: 0.98rem;
+    margin-bottom: 10px;
+  }
+  .editFormInput {
+    font-size: 0.98rem;
+    padding: 7px 8px;
+    min-width: 0;
+    width: 100%;
+  }
+  .editFormButton {
+    font-size: 0.98rem;
+    padding: 10px 0;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 8px;
+  }
 } 
