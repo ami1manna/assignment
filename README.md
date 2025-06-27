@@ -22,9 +22,11 @@ A modern, interactive Employee Dashboard built with **React** and **Vite**. Effo
 
 ## 📸 Screenshots
 
-> _Add your screenshots here!_
->
-> ![Dashboard Screenshot](./screenshots/dashboard.png)
+![image](https://github.com/user-attachments/assets/59cf4af2-8ab1-4fe0-afa1-4b2e20d136c7)
+![image](https://github.com/user-attachments/assets/31f806dc-7c84-4ce0-829e-b91cecf763a6)
+![image](https://github.com/user-attachments/assets/306d0047-e43a-4173-a3d9-8cccc2eb6eb2)
+![image](https://github.com/user-attachments/assets/d0c196fe-ff58-4ff3-aa0e-f636cb16b378)
+![image](https://github.com/user-attachments/assets/aeec4cbc-79a7-472b-8039-e41e01bf4987)
 
 ---
 
