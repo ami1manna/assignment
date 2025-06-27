@@ -1,98 +1,168 @@
 .detailsPanel {
-  max-width: 440px;
-  margin: 56px auto 0 auto;
+  max-width: 480px;
+  margin: 64px auto 0 auto;
   background: linear-gradient(135deg, #f4f6fb 0%, #fff 100%);
-  border: 1.5px solid #e3e8f0;
-  border-radius: 22px;
-  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.13);
-  padding: 56px 44px 40px 44px;
+  border: 2px solid #e3e8f0;
+  border-radius: 28px;
+  box-shadow: 0 12px 40px rgba(25, 118, 210, 0.14);
+  padding: 64px 48px 44px 48px;
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   transition: box-shadow 0.2s, border-color 0.2s, transform 0.18s;
+  animation: fadeInPanel 0.7s;
+}
+
+@keyframes fadeInPanel {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: none; }
 }
 
 .detailsPanel:hover {
-  box-shadow: 0 16px 48px rgba(25, 118, 210, 0.18);
+  box-shadow: 0 20px 56px rgba(25, 118, 210, 0.18);
   border-color: #1976d2;
   transform: translateY(-2px) scale(1.018);
 }
 
 .editFormLabel {
   display: block;
-  margin-bottom: 16px;
-  font-size: 1.08rem;
+  margin-bottom: 18px;
+  font-size: 1.13rem;
   color: #1976d2;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .editFormInput {
-  margin-left: 8px;
-  padding: 10px 16px;
-  border: 1.5px solid #e3e8f0;
-  border-radius: 7px;
-  font-size: 1.08rem;
+  margin-left: 10px;
+  padding: 12px 18px;
+  border: 2px solid #e3e8f0;
+  border-radius: 8px;
+  font-size: 1.13rem;
   background: #fff;
   transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
-  min-width: 180px;
+  min-width: 200px;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.06);
 }
 
 .editFormInput:focus {
   border-color: #1976d2;
-  box-shadow: 0 0 0 2px #1976d233;
+  box-shadow: 0 0 0 3px #1976d233;
 }
 
 .editFormButton {
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: none;
-  border-radius: 7px;
-  background: #1976d2;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
   color: #fff;
-  font-size: 1.08rem;
-  font-weight: 600;
+  font-size: 1.13rem;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 12px;
+  margin-top: 16px;
   transition: background 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 2px rgba(25, 118, 210, 0.04);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
 }
 
 .cancelButton {
   background: #888;
-  margin-left: 12px;
+  margin-left: 16px;
+  background: linear-gradient(90deg, #888 0%, #bdbdbd 100%);
 }
 
 .editFormButton:hover {
-  background: #1565c0;
+  background: linear-gradient(90deg, #1565c0 0%, #1976d2 100%);
 }
 
 .cancelButton:hover {
-  background: #555;
+  background: linear-gradient(90deg, #555 0%, #888 100%);
 }
 
 @media (max-width: 600px) {
   .detailsPanel {
     max-width: 98vw;
-    padding: 28px 6vw 14px 6vw;
-    border-radius: 12px;
+    padding: 32px 6vw 18px 6vw;
+    border-radius: 14px;
   }
   .editFormLabel {
-    font-size: 0.98rem;
+    font-size: 1rem;
     margin-bottom: 10px;
   }
   .editFormInput {
-    font-size: 0.98rem;
-    padding: 7px 8px;
+    font-size: 1rem;
+    padding: 8px 10px;
     min-width: 0;
     width: 100%;
   }
   .editFormButton {
-    font-size: 0.98rem;
+    font-size: 1rem;
     padding: 10px 0;
+    border-radius: 7px;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .detailsPanel {
+    max-width: 99vw;
+    padding: 18px 3vw 10px 3vw;
+    border-radius: 10px;
+    margin: 32px auto 0 auto;
+  }
+  .editFormLabel {
+    font-size: 0.98rem;
+    margin-bottom: 8px;
+  }
+  .editFormInput {
+    font-size: 0.98rem;
+    padding: 8px 8px;
+    min-width: 0;
+    width: 100%;
+    border-radius: 6px;
+  }
+  .editFormButton {
+    font-size: 0.98rem;
+    padding: 8px 0;
     border-radius: 6px;
     width: 100%;
     margin-top: 8px;
+  }
+  .cancelButton {
+    margin-left: 0;
+    margin-top: 8px;
+    width: 100%;
+    border-radius: 6px;
+    font-size: 0.98rem;
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .detailsPanel {
+    padding: 8px 1vw 4px 1vw;
+    border-radius: 5px;
+  }
+  .editFormLabel {
+    font-size: 0.93rem;
+    margin-bottom: 5px;
+  }
+  .editFormInput {
+    font-size: 0.93rem;
+    padding: 6px 4px;
+    border-radius: 4px;
+  }
+  .editFormButton {
+    font-size: 0.93rem;
+    padding: 6px 0;
+    border-radius: 4px;
+  }
+  .cancelButton {
+    font-size: 0.93rem;
+    padding: 6px 0;
+    border-radius: 4px;
   }
 } 

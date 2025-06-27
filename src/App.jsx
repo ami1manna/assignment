@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import EmployeeCard from './components/EmployeeCard/EmployeeCard';
 import SearchBar from './components/SearchBar/SearchBar';
-import EditEmployeeForm from './components/EditEmployeeForm/EditEmployeeForm';
-import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
+import { MdDeleteSweep } from 'react-icons/md';
 import toast, { Toaster } from 'react-hot-toast';
 import { useEmployeeContext } from './context/EmployeeContext';
 
@@ -73,17 +72,6 @@ const App = () => {
   return (
     <div className="dashboard-container">
       <Toaster position="top-right" />
-      <header className="main-header">
-        <h1>Employee Dashboard</h1>
-        <div className="subtitle">Manage your team efficiently and intuitively</div>
-        <div className="section-tag">
-          <span className="tag">HR Tool</span>
-        </div>
-        <div className="instructions">
-          <span>Search employees by ID, view details, edit, or delete. Select multiple employees to delete in bulk. Click on a card for more info.</span>
-        </div>
-      </header>
-     
       <SearchBar
         value={searchId}
         onChange={setSearchId}
@@ -91,26 +79,42 @@ const App = () => {
         onReset={handleReset}
         error={searchError}
       />
-      <h2>All Employees</h2>
+      <div className="h2-spacing" />
+      
+      <h2 className="employee-heading">All Employees</h2>
       {filtered.length > 0 && (
-        <div className="select-controls">
-          <label>
-            <input
-              type="checkbox"
-              checked={selected.length === filtered.length && filtered.length > 0}
-              onChange={handleSelectAll}
-            />
-            Select All
-          </label>
-          <button
-            onClick={handleDeleteSelected}
-            disabled={selected.length === 0}
-          >
-            Delete Selected
-          </button>
+        <>
+          <div className="select-controls enhanced-select-controls">
+            <label className="select-label">
+              <input
+                type="checkbox"
+                checked={selected.length === filtered.length && filtered.length > 0}
+                onChange={handleSelectAll}
+                className="select-checkbox"
+              />
+              Select All
+            </label>
+            <button
+              onClick={handleDeleteSelected}
+              disabled={selected.length === 0}
+              className="select-btn"
+            >
+              <MdDeleteSweep size={22} style={{ marginBottom: -3 }} /> Delete Selected
+            </button>
+            {selected.length > 0 && (
+              <span className="select-count">
+                {selected.length} selected
+              </span>
+            )}
+          </div>
+          <div className="select-divider" />
+        </>
+      )}
+      {loading && (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 120 }}>
+          <div className="spinner" />
         </div>
       )}
-      {loading && <p>Loading employees...</p>}
       <div className="employee-list">
         {filtered.map(emp => (
           <EmployeeCard

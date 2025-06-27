@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useEmployeeContext } from '../context/EmployeeContext';
 import EditEmployeeForm from '../components/EditEmployeeForm/EditEmployeeForm';
-import '../App.css';
 
 const EditEmployeePage = () => {
   const { id } = useParams();
@@ -20,7 +19,7 @@ const EditEmployeePage = () => {
   const [success, setSuccess] = useState(false);
 
   if (!employee) return (
-    <div className="details-panel">
+    <div className="dashboard-container">
       <p>No employee found.</p>
       <Link to="/">Back to Dashboard</Link>
     </div>
@@ -63,21 +62,23 @@ const EditEmployeePage = () => {
   };
 
   return (
-    <EditEmployeeForm
-      name={name}
-      salary={salary}
-      age={age}
-      onNameChange={setName}
-      onSalaryChange={setSalary}
-      onAgeChange={setAge}
-      onSave={handleSave}
-      onCancel={() => navigate('/')}
-      nameError={nameError}
-      salaryError={salaryError}
-      ageError={ageError}
-      isLoading={isLoading}
-      success={success}
-    />
+    <div className="dashboard-container">
+      <EditEmployeeForm
+        name={name}
+        salary={salary}
+        age={age}
+        onNameChange={setName}
+        onSalaryChange={setSalary}
+        onAgeChange={setAge}
+        onSave={handleSave}
+        onCancel={() => navigate('/')}
+        nameError={nameError}
+        salaryError={salaryError}
+        ageError={ageError}
+        isLoading={isLoading}
+        success={success}
+      />
+    </div>
   );
 };
 
