@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
 import styles from '../../../modules/employee/styles/EmployeeDetail.module.scss';
-import { Employee } from '../../../modules/employee/types';
 import { useAppSelector } from '../../../store/hooks';
 import { useRouter } from 'next/navigation';
 
