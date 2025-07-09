@@ -4,8 +4,9 @@ import EmployeeList from '../modules/employee/components/EmployeeList';
 
 export default function Home() {
   return (
-    <main>
+    <>
       <EmployeeList />
-    </main>
+     
+    </>
   );
 }

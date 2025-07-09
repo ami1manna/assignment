@@ -15,12 +15,14 @@ interface EmployeeState {
   employees: Employee[];
   loading: boolean;
   error: string | null;
+  selectedEmployeeIds: number[];
 }
 
 const initialState: EmployeeState = {
   employees: [],
   loading: false,
   error: null,
+  selectedEmployeeIds: [],
 };
 
 const employeeSlice = createSlice({
@@ -29,6 +31,24 @@ const employeeSlice = createSlice({
   reducers: {
     deleteEmployee: (state, action: PayloadAction<number>) => {
       state.employees = state.employees.filter(emp => emp.id !== action.payload);
+      state.selectedEmployeeIds = state.selectedEmployeeIds.filter(id => id !== action.payload);
+    },
+    deleteSelectedEmployees: (state) => {
+      state.employees = state.employees.filter(emp => !state.selectedEmployeeIds.includes(emp.id));
+      state.selectedEmployeeIds = [];
+    },
+    toggleSelect: (state, action: PayloadAction<number>) => {
+      if (state.selectedEmployeeIds.includes(action.payload)) {
+        state.selectedEmployeeIds = state.selectedEmployeeIds.filter(id => id !== action.payload);
+      } else {
+        state.selectedEmployeeIds.push(action.payload);
+      }
+    },
+    selectAll: (state) => {
+      state.selectedEmployeeIds = state.employees.map(emp => emp.id);
+    },
+    clearSelection: (state) => {
+      state.selectedEmployeeIds = [];
     },
     clearError: (state) => {
       state.error = null;
@@ -51,5 +71,5 @@ const employeeSlice = createSlice({
   },
 });
 
-export const { deleteEmployee, clearError } = employeeSlice.actions;
+export const { deleteEmployee, deleteSelectedEmployees, toggleSelect, selectAll, clearSelection, clearError } = employeeSlice.actions;
 export default employeeSlice.reducer; 

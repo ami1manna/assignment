@@ -1,10 +1,11 @@
+// Corrected EmployeeList.module.scss
 .employeeList {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 2rem;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
 }
 
 .container {
@@ -13,20 +14,14 @@
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  max-width: 800px;
-  width: 100%;
-  position: relative;
+  width: 90vw;
+  min-height: 80%;
+  height: 100%;
   overflow: hidden;
-}
-
-.container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .title {
@@ -43,14 +38,27 @@
 
 .searchContainer {
   margin-bottom: 2rem;
-  position: relative;
 }
 
 .employeeGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+  width: 100%;
   margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .employeeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .employeeGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 .employeeItem {
@@ -60,6 +68,9 @@
   transition: all 0.3s ease;
   overflow: hidden;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   
   &:hover {
     transform: translateY(-4px);
@@ -70,6 +81,9 @@
 .employeeCard {
   padding: 1.5rem;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .employeeAvatar {
@@ -134,6 +148,90 @@
   }
 }
 
+.multiDeleteBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+  font-size: 1.05rem;
+}
+
+.multiDeleteButton {
+  background: #e53e3e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(229, 62, 62, 0.08);
+  
+  &:hover {
+    background: #c53030;
+    transform: translateY(-2px) scale(1.05);
+  }
+}
+
+.clearSelectionButton {
+  background: #f6e05e;
+  color: #744210;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(246, 224, 94, 0.08);
+  
+  &:hover {
+    background: #ecc94b;
+    transform: translateY(-2px) scale(1.05);
+  }
+}
+
+.selectAllButton {
+  background: #38a169;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(56, 161, 105, 0.08);
+  
+  &:hover:enabled {
+    background: #2f855a;
+    transform: translateY(-2px) scale(1.05);
+  }
+  
+  &:disabled {
+    background: #a0aec0;
+    color: #f7fafc;
+    cursor: not-allowed;
+  }
+}
+
+.selectCheckbox {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 20px;
+  height: 20px;
+  accent-color: #667eea;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(102, 126, 234, 0.08);
+  cursor: pointer;
+  z-index: 2;
+}
+
 .loading {
   display: flex;
   align-items: center;
@@ -179,14 +277,20 @@
   
   .container {
     padding: 1.5rem;
+    width: 95vw;
+    min-height: 80%;
+    height: 100%;
   }
   
   .title {
     font-size: 2rem;
   }
   
-  .employeeGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .multiDeleteBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 1rem;
+    font-size: 0.98rem;
   }
-} 
+}
